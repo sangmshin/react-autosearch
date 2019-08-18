@@ -5,8 +5,6 @@ type Props = {
   isSearching: boolean
 }
 
-const Tint = ({isSearching}: Props) => {
-  return isSearching ? <div className={style.tint} ></div> : null
-}
+const Tint = ({isSearching}: Props) => isSearching ? <div className={style.tint} ></div> : null
 
 export default Tint

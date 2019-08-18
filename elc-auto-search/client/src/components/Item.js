@@ -2,8 +2,18 @@ import React from 'react';
 import { Col, Image } from 'react-bootstrap';
 import style from 'components/Item.module.scss';
 
+type ItemType = {
+  about: string,
+  isActive: "true" | "false",
+  name: string,
+  picture: string,
+  price: string,
+  _id: string,
+  tags: string[],
+}
+
 type Props = {
-  item: Object
+  item: ItemType
 }
 
 
@@ -20,4 +30,5 @@ const Item = ({item}: Props) => {
   )
 }
 
+export type { ItemType }
 export default Item

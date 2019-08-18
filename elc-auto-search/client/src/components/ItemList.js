@@ -1,9 +1,10 @@
 import React from 'react';
 import Item from 'components/Item';
+import type { ItemType } from 'components/Item';
 import {Row} from 'react-bootstrap';
 
 type Props = {
-  list: Object[]
+  list: Array<ItemType>
 }
 
 const ItemList = ({list}: Props) => {

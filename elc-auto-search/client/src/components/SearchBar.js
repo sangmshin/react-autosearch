@@ -2,24 +2,24 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import style from 'components/SearchBar.module.scss';
 
-type Props = {
-  searchItems: Function, 
-  addAllResults: Function, 
-  searching: Function, 
-  setVisible: Function
-}
+type Props = {|
+  searchItems:  (term: string)=> void, 
+  addAllResults: ()=> void, 
+  searching:  (bool: boolean)=> void, 
+  setVisible:  (bool: boolean)=> void
+|}
 
 const SearchBar = ({searchItems, addAllResults, searching, setVisible}: Props) => {
 
   const search_bar: ?HTMLInputElement  = useRef();
 
-  const [searchTerm: string, changeTerm: Function] = useState('')
+  const [ searchTerm: string, changeTerm: ()=> void ] = useState('')
 
 
-  const handleChange = e => changeTerm(e.target.value)
+  const handleChange = ({target: { value }}: SyntheticInputEvent<HTMLInputElement>): void => changeTerm(value)
   
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
     e.preventDefault();
     addAllResults()
     changeTerm('')

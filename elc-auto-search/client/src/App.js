@@ -1,22 +1,32 @@
 import React, {useState} from 'react';
 import './App.css';
 import { SearchBar, ItemList, Tint, Preview } from 'components';
+import type { ItemType } from 'component/Item'
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 
+type Res = {
+  data: Array<ItemType>,
+  status: number,
+  statusText: string,
+  header: {'content-type':string},
+  config: Object,
+  request: Object
+}
+
 export default () => {
 
-  const [items: Object[], addItems: Function] = useState([])
-  const [results: Object[], setResults: Function] = useState([])
-  const [isSearching: boolean, searching: Function] = useState(false);
-  const [isVisible: boolean, setVisible: Function] = useState(false)
+  const [ items: Array<ItemType>, addItems: ()=> void ] = useState([])
+  const [ results: Array<ItemType>, setResults: ()=> void ] = useState([])
+  const [ isSearching: boolean, searching: ()=> void ] = useState(false);
+  const [ isVisible: boolean, setVisible: ()=> void ] = useState(false)
 
-  const handleSubmit = async (searchTerm) => {
+  const handleSubmit = async (searchTerm): void => {
 
     try{
 
-      let response = await axios.get(`http://localhost:5000/?search=${searchTerm}`)
-      console.log(response.data);
+      let response: Res = await axios.get(`http://localhost:5000/?search=${searchTerm}`)
+      console.log(response);
       addItems(response.data)
 
     }catch(err){
@@ -25,7 +35,7 @@ export default () => {
 
   }
 
-  const addAllResults = () => setResults(items)
+  const addAllResults = (): void => setResults(items)
 
   return (
     <Container fluid>
